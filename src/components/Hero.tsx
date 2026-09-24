@@ -1,13 +1,16 @@
 'use client';
 
+import { useState, useCallback } from 'react';
+import Link from 'next/link';
 import { ArrowUpRight, Mail, Copy, Check } from 'lucide-react';
 import { siteConfig } from '@/lib/site';
-import { useState } from 'react';
+import { useMouseProximity, getProximityTransform } from '@/hooks/useMouseProximity';
 
 export function Hero() {
   const [emailCopied, setEmailCopied] = useState(false);
+  const { mousePosition } = useMouseProximity();
 
-  const handleCopyEmail = async () => {
+  const handleCopyEmail = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(siteConfig.email);
       setEmailCopied(true);
@@ -15,50 +18,59 @@ export function Hero() {
     } catch (err) {
       console.error('Failed to copy email:', err);
     }
-  };
+  }, []);
+
+  const heroVisualTransform = getProximityTransform(
+    typeof window !== 'undefined' ? { left: 0, top: 0, width: 800, height: 500 } as DOMRect : null,
+    mousePosition,
+    500,
+    8,
+    3
+  );
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/10 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/5" />
+        <div className="absolute top-1/4 left-1/4 w-[800px] h-[800px] rounded-full bg-amber-500/5 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-indigo-500/5 blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full border border-white/[0.03]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(245,200,66,0.04)_0%,_transparent_60%)]" />
       </div>
 
-      <div className="container-wide relative z-10">
+      <div className="section-container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="eyebrow animate-slide-up" style={{ animationDelay: '100ms' }}>
+          <p className="eyebrow mb-6 animate-fade-in">
             FULL-STACK WEB APPLICATION DEVELOPER
           </p>
 
-          <h1 className="heading-xl text-white mt-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
+          <h1 className="heading-xl text-white mb-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
             I build digital products
             <br />
             <span className="text-gradient-accent">that are made to work.</span>
           </h1>
 
-          <p className="body-lg mt-8 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '300ms' }}>
+          <p className="body-lg mt-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '200ms' }}>
             Production-ready web applications, AI platforms, SaaS products and modern digital experiences.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 animate-slide-up" style={{ animationDelay: '400ms' }}>
-            <a
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 animate-fade-in" style={{ animationDelay: '300ms' }}>
+            <Link
               href={siteConfig.cta.secondaryHref}
               className="btn-primary w-full sm:w-auto"
             >
               {siteConfig.cta.secondary}
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </a>
-            <a
+              <ArrowUpRight className="w-4 h-4 arrow-micro" aria-hidden="true" />
+            </Link>
+            <Link
               href={siteConfig.cta.primaryHref}
               className="btn-secondary w-full sm:w-auto"
             >
               {siteConfig.cta.primary}
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </a>
+            </Link>
           </div>
 
-          <div className="mt-16 animate-slide-up" style={{ animationDelay: '500ms' }}>
+          <div className="mt-16 animate-fade-in" style={{ animationDelay: '400ms' }}>
             <div className="flex flex-wrap items-center justify-center gap-4 text-zinc-500">
               <Mail className="w-4 h-4 shrink-0" aria-hidden="true" />
               <a
@@ -89,8 +101,14 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mt-24 relative animate-fade-in" style={{ animationDelay: '600ms' }}>
-          <div className="visual-card aspect-[4/3] lg:aspect-[16/9] max-w-5xl mx-auto">
+        <div className="mt-24 relative animate-fade-in" style={{ animationDelay: '500ms' }}>
+          <div
+            className="visual-card aspect-[4/3] lg:aspect-[16/9] max-w-5xl mx-auto"
+            style={{
+              transform: `translate(${heroVisualTransform.x * 0.5}px, ${heroVisualTransform.y * 0.3}px)`,
+              transition: 'transform 0.3s var(--transition-spring)',
+            }}
+          >
             <HeroVisual />
           </div>
         </div>
@@ -101,42 +119,42 @@ export function Hero() {
 
 function HeroVisual() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center p-8">
+    <div className="absolute inset-0 flex items-center justify-center p-6 lg:p-8">
       <div className="relative w-full h-full max-w-4xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 rounded-3xl" />
-        
-        <div className="relative z-10 grid grid-cols-2 gap-4 p-6">
-          <div className="col-span-2 rounded-2xl bg-zinc-900/50 border border-white/10 p-6">
-            <div className="flex items-center gap-3 mb-4">
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-indigo-500/5 rounded-3xl" />
+
+        <div className="relative z-10 grid grid-cols-2 gap-4 lg:gap-6 p-6 lg:p-8">
+          <div className="col-span-2 rounded-2xl bg-zinc-900/60 border border-white/10 p-6 lg:p-8">
+            <div className="flex items-center gap-3 mb-6">
               <div className="w-3 h-3 rounded-full bg-red-500" />
               <div className="w-3 h-3 rounded-full bg-yellow-500" />
               <div className="w-3 h-3 rounded-full bg-green-500" />
             </div>
-            <div className="space-y-3 font-mono text-sm text-zinc-300">
-              <div className="flex gap-2 text-indigo-400">
-                <span>{'>'} npm run dev</span>
+            <div className="space-y-4 font-mono text-sm">
+              <div className="flex gap-2 text-amber-400">
+                <span>&gt; npm run dev</span>
               </div>
               <div className="text-zinc-500">
-                <span>{'> '}</span>Starting development server...
+                <span>&gt; </span>Starting development server...
               </div>
               <div className="text-green-400">
-                <span>{'> '}</span>Ready on http://localhost:3000
+                <span>&gt; </span>Ready on http://localhost:3000
               </div>
-              <div className="text-indigo-400 mt-4">
-                <span>{'> '}</span>Building production bundle...
+              <div className="text-amber-400 mt-6">
+                <span>&gt; </span>Building production bundle...
               </div>
               <div className="text-green-400">
-                <span>{'> '}</span>Compiled successfully in 2.3s
+                <span>&gt; </span>Compiled successfully in 2.3s
               </div>
             </div>
           </div>
 
-          <div className="rounded-2xl bg-zinc-900/50 border border-white/10 p-6">
+          <div className="rounded-2xl bg-zinc-900/60 border border-white/10 p-6">
             <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
-              <span className="w-2 h-2 rounded-full bg-indigo-500" />
+              <span className="w-2 h-2 rounded-full bg-amber-500" />
               <span>API Gateway</span>
             </div>
-            <div className="space-y-2 text-sm">
+            <div className="space-y-3 text-sm">
               <div className="flex justify-between">
                 <span className="text-zinc-400">GET</span>
                 <span className="text-green-400">/api/projects</span>
@@ -152,12 +170,12 @@ function HeroVisual() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-zinc-900/50 border border-white/10 p-6">
+          <div className="rounded-2xl bg-zinc-900/60 border border-white/10 p-6">
             <div className="flex items-center gap-2 text-xs text-zinc-500 mb-4">
               <span className="w-2 h-2 rounded-full bg-purple-500" />
               <span>Database</span>
             </div>
-            <div className="space-y-2 text-sm font-mono text-zinc-400">
+            <div className="space-y-3 text-sm font-mono text-zinc-400">
               <div>users</div>
               <div>projects</div>
               <div>sessions</div>
@@ -165,8 +183,8 @@ function HeroVisual() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-zinc-900/50 border border-white/10 p-6 col-span-2">
-            <div className="flex items-center justify-between mb-4">
+          <div className="rounded-2xl bg-zinc-900/60 border border-white/10 p-6 col-span-2">
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2 text-xs text-zinc-500">
                 <span className="w-2 h-2 rounded-full bg-green-500" />
                 <span>Deployment</span>
@@ -175,11 +193,11 @@ function HeroVisual() {
             </div>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div className="p-4 rounded-xl bg-zinc-900/50 border border-white/5">
-                <div className="text-2xl font-bold text-indigo-400">99.9%</div>
+                <div className="text-2xl font-bold text-amber-400">99.9%</div>
                 <div className="text-xs text-zinc-500 mt-1">Uptime</div>
               </div>
               <div className="p-4 rounded-xl bg-zinc-900/50 border border-white/5">
-                <div className="text-2xl font-bold text-purple-400">{'<'}100ms</div>
+                <div className="text-2xl font-bold text-purple-400">&lt;100ms</div>
                 <div className="text-xs text-zinc-500 mt-1">Latency</div>
               </div>
               <div className="p-4 rounded-xl bg-zinc-900/50 border border-white/5">
