@@ -479,3 +479,73 @@ button:focus-visible {
 .visual-card:hover .project-visual-overlay {
   opacity: 1;
 }
+
+/* Cinematic Hero Styles */
+.hero-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(245, 200, 66, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 60%, rgba(99, 102, 241, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(245, 200, 66, 0.02) 0%, transparent 70%),
+    linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%);
+}
+
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+/* 3D Scene Perspective */
+.scene-3d {
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+}
+
+.object-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Laptop 3D Transform */
+.laptop-3d {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+/* Typography adjustments for cinematic layout */
+.hero-title {
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+/* Glow effects for 3D objects */
+.glow-amber {
+  box-shadow: 0 0 30px rgba(245, 200, 66, 0.3), 0 0 60px rgba(245, 200, 66, 0.15);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2), 0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+/* Floating animation for objects */
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-subtle-float {
+  animation: subtle-float 8s ease-in-out infinite;
+}
