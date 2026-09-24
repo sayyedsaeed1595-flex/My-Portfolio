@@ -19,11 +19,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="img-hover absolute inset-0">
-            <ProjectVisual
-              type={project.visualType}
-              coverImage={project.coverImage}
-              alt={`${project.name} preview`}
-            />
+            <ProjectVisual type={project.visualType} />
           </div>
         </div>
 
