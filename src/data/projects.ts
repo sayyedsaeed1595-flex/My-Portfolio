@@ -13,6 +13,10 @@ export interface Project {
   deployment: string;
   highlights: string[];
   visualType: 'text2img' | 'flexshop' | 'toolzypro' | 'aao-urdu' | 'ecommerce';
+  /** Main project cover image under /public */
+  coverImage?: string;
+  /** Additional detail images under /public */
+  images?: string[];
   githubUrl?: string;
   liveUrl?: string;
 }
@@ -55,6 +59,8 @@ export const projects: Project[] = [
       'Type-safe API contracts with Zod validation'
     ],
     visualType: 'text2img',
+    coverImage: '/images/projects/Screenshot (230).png',
+    images: ['/images/projects/Screenshot (231).png'],
     githubUrl: undefined,
     liveUrl: undefined
   },
@@ -139,6 +145,11 @@ export const projects: Project[] = [
       'PWA installable with offline support'
     ],
     visualType: 'toolzypro',
+    coverImage: '/images/projects/Screenshot (277).png',
+    images: [
+      '/images/projects/Screenshot (278).png',
+      '/images/projects/Screenshot (279).png',
+    ],
     githubUrl: undefined,
     liveUrl: undefined
   },
@@ -221,6 +232,7 @@ export const projects: Project[] = [
       'Production monitoring and alerting'
     ],
     visualType: 'ecommerce',
+    coverImage: '/images/projects/Screenshot (178).png',
     githubUrl: undefined,
     liveUrl: undefined
   }

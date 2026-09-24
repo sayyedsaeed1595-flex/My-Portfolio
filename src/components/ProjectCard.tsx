@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Project } from '@/data/projects';
+import { ProjectVisual } from '@/components/projects/ProjectVisual';
 
 interface ProjectCardProps {
   project: Project;
@@ -17,8 +18,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
         aria-label={`View ${project.name} project`}
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="img-hover">
-            <ProjectVisual type={project.visualType} />
+          <div className="img-hover absolute inset-0">
+            <ProjectVisual
+              type={project.visualType}
+              coverImage={project.coverImage}
+              alt={`${project.name} preview`}
+            />
           </div>
         </div>
 
@@ -76,58 +81,5 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </Link>
     </article>
-  );
-}
-
-function ProjectVisual({ type }: { type: Project['visualType'] }) {
-  switch (type) {
-    case 'text2img':
-      return <Text2IMGVisual />;
-    case 'flexshop':
-      return <FlexShopVisual />;
-    case 'toolzypro':
-      return <ToolzyProVisual />;
-    case 'aao-urdu':
-      return <AaoUrduVisual />;
-    case 'ecommerce':
-      return <ECommerceVisual />;
-    default:
-      return <DefaultVisual />;
-  }
-}
-
-function Text2IMGVisual() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-zinc-900 to-purple-900/30" />
-  );
-}
-
-function FlexShopVisual() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-zinc-900 to-teal-900/20" />
-  );
-}
-
-function ToolzyProVisual() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-zinc-900 to-orange-900/20" />
-  );
-}
-
-function AaoUrduVisual() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-rose-900/20 via-zinc-900 to-pink-900/20" />
-  );
-}
-
-function ECommerceVisual() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-zinc-900 to-cyan-900/20" />
-  );
-}
-
-function DefaultVisual() {
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-800" />
   );
 }

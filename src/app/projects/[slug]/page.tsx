@@ -58,11 +58,40 @@ function ProjectDetailHeader({ project }: { project: Project }) {
 }
 
 function ProjectVisualSection({ project }: { project: Project }) {
+  const detailImages = project.images ?? [];
+
   return (
-    <section className="mb-16 lg:mb-20">
-      <div className="visual-card aspect-[4/3] lg:aspect-[16/9]">
-        <ProjectVisual type={project.visualType} />
+    <section className="mb-16 lg:mb-20 space-y-6">
+      <div className="visual-card relative aspect-[4/3] lg:aspect-[16/9] overflow-hidden">
+        <ProjectVisual
+          type={project.visualType}
+          coverImage={project.coverImage}
+          alt={`${project.name} main screenshot`}
+          withOverlay={false}
+        />
       </div>
+
+      {detailImages.length > 0 && (
+        <div
+          className={`grid gap-6 ${
+            detailImages.length > 1 ? 'sm:grid-cols-2' : 'grid-cols-1'
+          }`}
+        >
+          {detailImages.map((src, index) => (
+            <div
+              key={src}
+              className="visual-card relative aspect-[4/3] lg:aspect-[16/9] overflow-hidden"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={`${project.name} detail ${index + 1}`}
+                className="absolute inset-0 h-full w-full object-cover object-top"
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
