@@ -100,6 +100,10 @@ export const projects: Project[] = [
       'Optimistic UI updates for cart actions'
     ],
     visualType: 'flexshop',
+    images: [
+      '/images/projects/1789492968636.png',
+      '/images/projects/24f0f33b467fc5f32fe5af72c559f09fcc60b08cb02049492d6c18fe97f13612.1.jpg',
+    ],
     githubUrl: undefined,
     liveUrl: undefined
   },
