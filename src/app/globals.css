@@ -49,6 +49,45 @@
 :root {
   --background: #08080a;
   --foreground: #fafafa;
+  --color-background: #08080a;
+  --color-background-secondary: #0f0f12;
+  --color-card: #121215;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-accent: #f59e0b;
+  --color-accent-hover: #fbbf24;
+  --color-accent-deep: #ea580c;
+  --color-accent-glow: rgba(245, 158, 11, 0.15);
+  --color-accent-glow-strong: rgba(245, 158, 11, 0.3);
+  --color-accent-deep-glow: rgba(234, 88, 12, 0.2);
+  --color-cyan: #38bdf8;
+  --color-cyan-glow: rgba(56, 189, 248, 0.15);
+  --color-cyan-glow-strong: rgba(56, 189, 248, 0.3);
+}
+
+html.light {
+  --background: #fafafa;
+  --foreground: #08080a;
+  --color-background: #fafafa;
+  --color-background-secondary: #f4f4f5;
+  --color-card: #ffffff;
+  --color-text-primary: #08080a;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #71717a;
+  --color-border: rgba(8, 8, 10, 0.08);
+  --color-border-hover: rgba(8, 8, 10, 0.15);
+  --color-accent: #d97706;
+  --color-accent-hover: #b45309;
+  --color-accent-deep: #c2410c;
+  --color-accent-glow: rgba(217, 119, 6, 0.15);
+  --color-accent-glow-strong: rgba(217, 119, 6, 0.25);
+  --color-accent-deep-glow: rgba(194, 65, 12, 0.2);
+  --color-cyan: #0284c7;
+  --color-cyan-glow: rgba(2, 132, 199, 0.12);
+  --color-cyan-glow-strong: rgba(2, 132, 199, 0.25);
 }
 
 * {

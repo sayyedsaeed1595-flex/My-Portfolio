@@ -2,15 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/lib/theme';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<string>('/');
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,7 +99,14 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center">
+            <div className="hidden md:flex items-center gap-3">
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300"
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
               <Link
                 href={siteConfig.cta.primaryHref}
                 className="btn-primary"
@@ -143,14 +152,23 @@ export function Navbar() {
                     {item.label}
                   </Link>
                 ))}
-                <Link
-                  href={siteConfig.cta.primaryHref}
-                  className="btn-primary w-full justify-center mt-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {siteConfig.cta.primary}
-                  <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-                </Link>
+                <div className="w-full flex items-center justify-center gap-3 mt-2">
+                  <button
+                    onClick={toggleTheme}
+                    className="p-2 rounded-xl bg-white/5 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300"
+                    aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                  >
+                    {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                  </button>
+                  <Link
+                    href={siteConfig.cta.primaryHref}
+                    className="btn-primary w-full justify-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {siteConfig.cta.primary}
+                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                  </Link>
+                </div>
               </nav>
             </motion.div>
           )}
