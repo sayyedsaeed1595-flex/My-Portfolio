@@ -11,8 +11,8 @@ export const siteConfig = {
     { label: 'Contact', href: '/contact' }
   ],
   social: {
-    github: 'https://github.com/saeedsayyed',
-    linkedin: 'https://linkedin.com/in/saeedsayyed'
+    github: 'https://github.com/sayyedsaeed1595-flex',
+    linkedin: 'https://linkedin.com/in/saeed-sayyed-25a3641a4'
   },
   cta: {
     primary: "Let's Talk",
