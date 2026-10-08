@@ -1,145 +1,47 @@
 'use client';
 
+import { motion } from 'framer-motion';
+
 export function LaptopMockup() {
   return (
-    <div
-      className="relative"
-      style={{
-        width: '420px',
-        perspective: '1200px',
-      }}
-    >
-      {/* Screen */}
-      <div
-        className="relative rounded-t-2xl overflow-hidden border border-white/10"
+    <div className="scene-3d relative w-full aspect-[4/3]">
+      <motion.div
+        initial={{ opacity: 0, y: 40, rotateX: 15, rotateY: -10 }}
+        animate={{ opacity: 1, y: 0, rotateX: 0, rotateY: 0 }}
+        transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
+        className="relative w-full h-full laptop-3d"
         style={{
-          width: '100%',
-          height: '280px',
-          background: '#0a0a0a',
-          transform: 'rotateX(-5deg)',
           transformStyle: 'preserve-3d',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(245,200,66,0.05), inset 0 1px 0 rgba(255,255,255,0.1)',
+          perspective: '1200px',
         }}
       >
-        {/* Webcam */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-black z-10" />
-
-        {/* FlexShop UI Screen */}
-        <div className="p-4 h-full overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 100%)' }}>
-          {/* Navbar */}
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-amber-500/20 flex items-center justify-center">
-                <div className="w-3 h-3 rounded bg-amber-400" />
-              </div>
-              <span className="text-xs font-bold text-white tracking-wide">FlexShop</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1">
-                <div className="w-6 h-1 rounded bg-white/10" />
-                <div className="w-6 h-1 rounded bg-white/10" />
-                <div className="w-6 h-1 rounded bg-amber-400/50" />
-              </div>
-              <div className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                <div className="w-3 h-3 rounded-full bg-white/20" />
-              </div>
-            </div>
-          </div>
-
-          {/* Product Grid */}
-          <div className="grid grid-cols-2 gap-2">
-            {/* Product Card 1 */}
-            <div className="rounded-lg bg-zinc-900/60 border border-white/5 p-2">
-              <div className="w-full aspect-square rounded-md bg-gradient-to-br from-zinc-800 to-zinc-900 mb-1.5 flex items-center justify-center">
-                <div className="w-8 h-8 rounded bg-amber-500/20" />
-              </div>
-              <div className="h-1.5 w-3/4 rounded bg-white/10 mb-1" />
-              <div className="h-1.5 w-1/2 rounded bg-white/5 mb-1" />
-              <div className="flex items-center justify-between">
-                <div className="h-2 w-16 rounded bg-amber-500/20" />
-                <div className="w-5 h-5 rounded bg-amber-500/30" />
-              </div>
-            </div>
-
-            {/* Product Card 2 */}
-            <div className="rounded-lg bg-zinc-900/60 border border-white/5 p-2">
-              <div className="w-full aspect-square rounded-md bg-gradient-to-br from-zinc-800 to-zinc-900 mb-1.5 flex items-center justify-center">
-                <div className="w-8 h-8 rounded bg-blue-500/20" />
-              </div>
-              <div className="h-1.5 w-3/4 rounded bg-white/10 mb-1" />
-              <div className="h-1.5 w-1/2 rounded bg-white/5 mb-1" />
-              <div className="flex items-center justify-between">
-                <div className="h-2 w-16 rounded bg-blue-500/20" />
-                <div className="w-5 h-5 rounded bg-blue-500/30" />
-              </div>
-            </div>
-
-            {/* Product Card 3 */}
-            <div className="rounded-lg bg-zinc-900/60 border border-white/5 p-2">
-              <div className="w-full aspect-square rounded-md bg-gradient-to-br from-zinc-800 to-zinc-900 mb-1.5 flex items-center justify-center">
-                <div className="w-8 h-8 rounded bg-green-500/20" />
-              </div>
-              <div className="h-1.5 w-3/4 rounded bg-white/10 mb-1" />
-              <div className="h-1.5 w-1/2 rounded bg-white/5 mb-1" />
-              <div className="flex items-center justify-between">
-                <div className="h-2 w-16 rounded bg-green-500/20" />
-                <div className="w-5 h-5 rounded bg-green-500/30" />
-              </div>
-            </div>
-
-            {/* Product Card 4 */}
-            <div className="rounded-lg bg-zinc-900/60 border border-white/5 p-2">
-              <div className="w-full aspect-square rounded-md bg-gradient-to-br from-zinc-800 to-zinc-900 mb-1.5 flex items-center justify-center">
-                <div className="w-8 h-8 rounded bg-purple-500/20" />
-              </div>
-              <div className="h-1.5 w-3/4 rounded bg-white/10 mb-1" />
-              <div className="h-1.5 w-1/2 rounded bg-white/5 mb-1" />
-              <div className="flex items-center justify-between">
-                <div className="h-2 w-16 rounded bg-purple-500/20" />
-                <div className="w-5 h-5 rounded bg-purple-500/30" />
-              </div>
-            </div>
-          </div>
-
-          {/* Cart Button */}
-          <div className="mt-2 flex items-center justify-between">
-            <div className="h-1.5 w-24 rounded bg-white/5" />
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-500/30">
-              <div className="w-2 h-2 rounded-full bg-amber-400" />
-              <div className="h-1.5 w-12 rounded bg-amber-400/50" />
-            </div>
-          </div>
+        <div className="laptop-shadow absolute bottom-[-8%] left-1/2 -translate-x-1/2 w-[85%] h-20">
+          <div className="absolute inset-0 bg-black/40 blur-[60px] rounded-full" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent blur-[40px] rounded-full" />
         </div>
-      </div>
 
-      {/* Hinge */}
-      <div
-        className="mx-auto"
-        style={{
-          width: '80%',
-          height: '8px',
-          background: 'linear-gradient(180deg, #2a2a2a, #1a1a1a)',
-          borderLeft: '1px solid rgba(255,255,255,0.05)',
-          borderRight: '1px solid rgba(255,255,255,0.05)',
-        }}
-      />
+        <div className="laptop-body relative w-full h-full transform-gpu" style={{ transformStyle: 'preserve-3d' }}>
+          <div className="laptop-base absolute bottom-0 left-0 right-0 h-[8%] bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 rounded-b-2xl border border-zinc-700/50 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.8)]" style={{ transform: 'translateZ(-12px) rotateX(90deg)', transformOrigin: 'bottom center' }}>
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-700/30 to-transparent" />
+          </div>
 
-      {/* Keyboard Base */}
-      <div
-        className="rounded-b-2xl mx-auto"
-        style={{
-          width: '440px',
-          height: '20px',
-          background: 'linear-gradient(180deg, #1a1a1a, #0f0f0f)',
-          border: '1px solid rgba(255,255,255,0.05)',
-          borderTop: 'none',
-          borderRadius: '0 0 12px 12px',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-        }}
-      >
-        {/* Trackpad */}
-        <div className="absolute top-1 left-1/2 -translate-x-1/2 w-16 h-10 rounded bg-zinc-800 border border-white/5" />
-      </div>
+          <div className="laptop-screen relative w-full h-[92%] bg-zinc-950 rounded-t-2xl border border-zinc-800 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.03),inset_0_1px_0_rgba(255,255,255,0.05)]" style={{ transform: 'translateZ(0)', transformStyle: 'preserve-3d' }}>
+            <div className="screen-bezel absolute inset-0 pointer-events-none">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1.5 bg-zinc-800 rounded-b-full" />
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-zinc-700/50" />
+            </div>
+
+            <div className="absolute inset-4 bg-[url('/images/projects/1789492968636.png')] bg-cover bg-center bg-no-repeat" style={{ filter: 'contrast(1.05) saturate(1.1)' }} />
+            
+            <div className="absolute inset-4 bg-gradient-to-b from-transparent via-transparent to-black/30 pointer-events-none" />
+            <div className="absolute inset-4 bg-[radial-gradient(ellipse_at_center,_rgba(245,158,11,0.03)_0%,_transparent_70%)] pointer-events-none" />
+          </div>
+
+          <div className="laptop-hinge absolute bottom-[8%] left-1/2 -translate-x-1/2 w-16 h-2 bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.5)]" style={{ transform: 'translateZ(-10px)' }} />
+        </div>
+
+        <div className="screen-glow absolute inset-0 bg-gradient-to-t from-amber-500/5 via-transparent to-transparent rounded-t-2xl opacity-0 pointer-events-none animate-pulse-glow" style={{ filter: 'blur(40px)' }} />
+      </motion.div>
     </div>
   );
 }
