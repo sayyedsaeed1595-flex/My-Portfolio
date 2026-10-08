@@ -54,8 +54,8 @@ function getGradient(type: Project['visualType']): string {
       return 'from-emerald-900/20 via-zinc-900 to-teal-900/20';
     case 'toolzypro':
       return 'from-amber-900/20 via-zinc-900 to-orange-900/20';
-    case 'aao-urdu':
-      return 'from-rose-900/20 via-zinc-900 to-pink-900/20';
+    case 'clinic':
+      return 'from-emerald-900/20 via-zinc-900 to-teal-900/20';
     case 'ecommerce':
       return 'from-blue-900/20 via-zinc-900 to-cyan-900/20';
     default:

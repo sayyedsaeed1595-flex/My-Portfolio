@@ -12,7 +12,7 @@ export interface Project {
   architecture: string;
   deployment: string;
   highlights: string[];
-  visualType: 'text2img' | 'flexshop' | 'toolzypro' | 'aao-urdu' | 'ecommerce';
+  visualType: 'text2img' | 'flexshop' | 'toolzypro' | 'clinic' | 'ecommerce';
   /** Main project cover image under /public */
   coverImage?: string;
   /** Additional detail images under /public */
@@ -158,43 +158,55 @@ export const projects: Project[] = [
     liveUrl: undefined
   },
   {
-    slug: 'aao-urdu-seekhein',
+    slug: 'clinic',
     number: '04',
-    name: 'Aao Urdu Seekhein',
-    category: 'Learning Management Platform',
-    description: 'An LMS platform designed around structured lessons, student access, progress tracking and administrative content management.',
-    longDescription: 'Aao Urdu Seekhein is a bilingual (Urdu/English) learning management system for Urdu language education. It provides structured courses, lesson progression, student dashboards, and an administrative interface for content management.',
-    problem: 'Language learning platforms often lack support for right-to-left scripts, bilingual content management, and culturally appropriate UX patterns for South Asian learners.',
-    solution: 'A purpose-built LMS with full RTL support, bilingual content editing, progress tracking aligned with language learning pedagogy, and an admin interface designed for non-technical content creators.',
+    name: 'Smart Clinic Management System',
+    category: 'Clinic Management / SaaS',
+    description: 'A clinic management web application for online appointments, QR check-ins, digital tokens, queue management, doctors, and staff operations.',
+    longDescription: 'Smart Clinic Management System is a comprehensive SaaS platform designed to streamline clinic operations. It enables patients to book appointments online, check in via QR codes, receive digital tokens, and view real-time queue status. Doctors and staff get dedicated dashboards for schedule management, appointment handling, and clinic operations oversight.',
+    problem: 'Clinics often rely on manual processes for appointment booking, patient check-in, and queue management — leading to long wait times, scheduling conflicts, and poor patient experience. Existing solutions are either too complex, expensive, or lack the specific workflows needed for outpatient clinics.',
+    solution: 'A purpose-built clinic management platform with patient-facing booking and check-in flows, real-time queue display, digital token system, and role-based dashboards for doctors and staff — all in a responsive, accessible web application.',
     features: [
-      'Course / chapter / lesson hierarchy',
-      'Student progress tracking',
-      'Video + text lesson content',
-      'Quizzes and assessments',
-      'Bilingual content editor (Urdu/English)',
-      'RTL-optimized interface',
-      'Admin dashboard for content management',
-      'Role-based access (student/admin)',
-      'Payment integration for premium courses',
-      'Certificate generation'
+      'Online appointment booking with real-time availability',
+      'QR code-based patient check-in',
+      'Digital token generation and display',
+      'Real-time clinic queue with live updates',
+      'Doctor schedule management with time slots',
+      'Staff dashboard for appointment operations',
+      'Appointment management (create, reschedule, cancel)',
+      'Clinic operations dashboard with analytics',
+      'Role-based access (patient, doctor, staff, admin)',
+      'Responsive design for mobile and desktop'
     ],
     technologies: [
       'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
       'PostgreSQL',
       'Prisma',
-      'Authentication',
-      'Cloud Storage',
-      'Payments'
+      'Authentication'
     ],
-    architecture: 'Next.js with Prisma ORM on PostgreSQL. NextAuth for authentication with role-based access. File uploads to cloud storage with signed URLs. Background jobs for certificate generation and email notifications.',
-    deployment: 'Containerized deployment on cloud infrastructure. Managed PostgreSQL. CDN for media assets. Automated backups and monitoring.',
+    architecture: 'Next.js App Router with Server Components for data fetching. Prisma ORM with PostgreSQL for type-safe database access. NextAuth for authentication with role-based access control. Real-time updates via Server-Sent Events for queue display. QR codes generated client-side for check-in.',
+    deployment: 'Deployed on Cloudflare Pages with Cloudflare D1/PostgreSQL database. CI/CD via GitHub Actions. Edge caching for static assets. Environment-based configuration for multi-clinic support.',
     highlights: [
-      'Full RTL layout support',
-      'Bilingual content management',
-      'Prisma type-safe database access',
-      'Server-side rendering for SEO-critical pages'
+      'Sub-second queue updates via SSE',
+      'Zero-dependency QR code generation',
+      'Full TypeScript coverage with Prisma',
+      'WCAG 2.1 AA compliant patient flows'
     ],
-    visualType: 'aao-urdu',
+    visualType: 'clinic',
+    coverImage: '/images/projects/Screenshot 1.png',
+    images: [
+      '/images/projects/Screenshot 2.png',
+      '/images/projects/Screenshot 3.png',
+      '/images/projects/Screenshot 4.png',
+      '/images/projects/Screenshot 5.png',
+      '/images/projects/Screenshot 6.png',
+      '/images/projects/Screenshot 7.png',
+      '/images/projects/Screenshot 8.png',
+      '/images/projects/Screenshot 9.png',
+      '/images/projects/Screenshot 10.png',
+    ],
     githubUrl: undefined,
     liveUrl: undefined
   },
