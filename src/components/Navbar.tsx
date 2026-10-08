@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { siteConfig } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState<string>('/');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,87 +20,142 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const path = window.location.pathname;
+    setActiveItem(path === '/' ? '/' : path);
+  }, []);
+
+  const navigationItems = [
+    { label: 'Work', href: '/projects' },
+    { label: 'Services', href: '/services' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ];
+
   return (
     <header
       suppressHydrationWarning
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300',
-        isScrolled ? 'glass-strong' : 'bg-transparent'
+        'fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[calc(100%-2rem)] md:max-w-[calc(100%-4rem)] transition-all duration-500',
+        isScrolled ? 'top-4' : 'top-6'
       )}
+      style={{ willChange: 'transform, top' }}
     >
-      <div className="section-container h-full flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-bold text-lg tracking-tight hover:opacity-80 transition-opacity"
-          aria-label={`${siteConfig.name} - Home`}
-        >
-          {siteConfig.name}
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-10">
-          {siteConfig.navigation.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-sm font-medium text-zinc-400 hover:text-white transition-all duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:w-0 after:bg-indigo-500 hover:after:w-full after:transition-all after:duration-200"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-4">
-          <Link
-            href={siteConfig.cta.primaryHref}
-            className="btn-secondary"
-          >
-            {siteConfig.cta.primary}
-            <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-          </Link>
-        </div>
-
-        <button
-          className="md:hidden p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-menu"
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      <div
-        id="mobile-menu"
-        className={cn(
-          'md:hidden fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-black/95 backdrop-blur-sm',
-          isMobileMenuOpen ? 'animate-fade-in' : 'hidden'
-        )}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile menu"
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+        className="relative"
       >
-        <nav className="flex flex-col items-center gap-6">
-          {siteConfig.navigation.map((item) => (
+        <nav
+          className={cn(
+            'glass-strong rounded-full px-5 py-3 shadow-2xl',
+            'border border-white/10',
+            isScrolled && 'shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5),0_0_80px_-30px_rgba(245,158,11,0.08)]'
+          )}
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <div className="flex items-center justify-between gap-4">
             <Link
-              key={item.label}
-              href={item.href}
-              className="text-2xl font-medium text-zinc-300 hover:text-indigo-400 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
+              href="/"
+              className="flex items-center gap-2 font-bold text-lg tracking-tight text-white hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
+              aria-label={`${siteConfig.name} - Home`}
             >
-              {item.label}
+              <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-black font-mono text-sm">
+                S
+              </span>
+              <span className="hidden sm:block">Saeed Sayyed</span>
             </Link>
-          ))}
-          <Link
-            href={siteConfig.cta.primaryHref}
-            className="btn-primary mt-4"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            {siteConfig.cta.primary}
-            <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-          </Link>
+
+            <div className="hidden md:flex items-center gap-1 relative" role="menubar">
+              <motion.div
+                className="pill-indicator pointer-events-none"
+                style={{ width: activeItem !== '/' ? 100 : 0 }}
+                animate={{
+                  x: navigationItems.findIndex(item => item.href === activeItem) * 96 + 4,
+                  width: activeItem !== '/' ? 92 : 0,
+                  opacity: activeItem !== '/' ? 1 : 0,
+                }}
+                transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                aria-hidden="true"
+              />
+              {navigationItems.map((item, index) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    'nav-pill relative z-10',
+                    activeItem === item.href && 'active'
+                  )}
+                  role="menuitem"
+                  onMouseEnter={() => setActiveItem(item.href)}
+                  onMouseLeave={() => setActiveItem(window.location.pathname)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden md:flex items-center">
+              <Link
+                href={siteConfig.cta.primaryHref}
+                className="btn-primary"
+              >
+                {siteConfig.cta.primary}
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+            </div>
+
+            <button
+              className="md:hidden p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition-colors flex-shrink-0"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </nav>
-      </div>
+
+        <AnimatePresence mode="wait">
+          {isMobileMenuOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="mt-4 glass-strong rounded-2xl p-6 md:hidden overflow-hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile menu"
+            >
+              <nav className="flex flex-col items-center gap-4">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="w-full text-center py-3 px-4 rounded-xl text-zinc-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Link
+                  href={siteConfig.cta.primaryHref}
+                  className="btn-primary w-full justify-center mt-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {siteConfig.cta.primary}
+                  <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </header>
   );
 }
