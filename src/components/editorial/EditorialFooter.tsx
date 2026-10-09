@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Copy, Check } from 'lucide-react';
 import { siteConfig } from '@/lib/site';
-import type { EditorialVariant } from './EditorialHeader';
+import type { EditorialVariant } from './variant';
 
 interface EditorialFooterProps {
   variant: EditorialVariant;

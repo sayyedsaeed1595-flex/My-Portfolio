@@ -160,7 +160,7 @@ export const projects: Project[] = [
   {
     slug: 'clinic',
     number: '04',
-    name: 'Smart Clinic Management System',
+    name: 'PrimeCare Clinic Demo',
     category: 'Clinic Management / SaaS',
     description: 'A clinic management web application for online appointments, QR check-ins, digital tokens, queue management, doctors, and staff operations.',
     longDescription: 'Smart Clinic Management System is a comprehensive SaaS platform designed to streamline clinic operations. It enables patients to book appointments online, check in via QR codes, receive digital tokens, and view real-time queue status. Doctors and staff get dedicated dashboards for schedule management, appointment handling, and clinic operations oversight.',
