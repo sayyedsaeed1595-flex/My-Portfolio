@@ -58,7 +58,7 @@ export function ContactSection({ variant }: ContactSectionProps) {
           </p>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href={siteConfig.cta.primaryHref}
+              href={`/${variant}/contact`}
               className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/60 px-6 py-3 text-sm font-semibold text-amber-300 transition-all hover:-translate-y-0.5 hover:bg-amber-400/10"
             >
               Get in Touch

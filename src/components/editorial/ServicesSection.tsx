@@ -62,7 +62,7 @@ export function ServicesSection({ variant }: ServicesSectionProps) {
                 transition={{ duration: 0.45, delay: (index % 4) * 0.06, ease: 'easeOut' }}
               >
                 <Link
-                  href={service.href}
+                  href={`/${variant}/contact`}
                   className={`group flex h-full flex-col gap-2.5 rounded-xl border p-4 transition-all duration-300 hover:-translate-y-0.5 ${
                     isDark
                       ? 'border-white/[0.07] bg-white/[0.02] hover:border-cyan-300/25 hover:bg-white/[0.05]'

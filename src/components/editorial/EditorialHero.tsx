@@ -96,7 +96,7 @@ export function EditorialHero({ variant }: EditorialHeroProps) {
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
-              href={siteConfig.cta.primaryHref}
+              href={`/${variant}/contact`}
               className={`inline-flex items-center justify-center gap-1.5 rounded-full border px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${
                 isDark
                   ? 'border-white/15 text-[#eef2f7] hover:border-white/30 hover:bg-white/[0.05] focus-visible:outline-[#7dd3fc]'

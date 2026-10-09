@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Sun, Moon, ArrowUpRight } from 'lucide-react';
-import { siteConfig } from '@/lib/site';
 import type { EditorialVariant } from './variant';
 
 interface EditorialNavbarProps {
@@ -24,8 +23,8 @@ export function EditorialNavbar({ variant }: EditorialNavbarProps) {
     { label: 'Home', href: `${base}#top` },
     { label: 'Work', href: `${base}#work` },
     { label: 'Services', href: `${base}#services` },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: `${base}/about` },
+    { label: 'Contact', href: `${base}/contact` },
   ];
 
   const handleThemeSwitch = () => {
@@ -116,13 +115,14 @@ export function EditorialNavbar({ variant }: EditorialNavbarProps) {
                 {isDark ? 'LIGHT' : 'DARK'}
               </span>
             </button>
-            <Link
-              href={siteConfig.cta.primaryHref}
-              className="hidden items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2 text-[13px] font-semibold text-black shadow-[0_8px_24px_-8px_rgba(245,158,11,0.6)] transition-transform hover:-translate-y-0.5 sm:inline-flex"
-            >
-              Let&apos;s Talk
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
+              <Link
+                href={`${base}/contact`}
+                className="hidden items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-2 text-[13px] font-semibold text-black shadow-[0_8px_24px_-8px_rgba(245,158,11,0.6)] transition-transform hover:-translate-y-0.5 sm:inline-flex"
+                aria-label="Let's Talk — contact page"
+              >
+                Let&apos;s Talk
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
@@ -169,7 +169,7 @@ export function EditorialNavbar({ variant }: EditorialNavbarProps) {
                 </Link>
               ))}
               <Link
-                href={siteConfig.cta.primaryHref}
+                href={`${base}/contact`}
                 onClick={() => setMenuOpen(false)}
                 className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-3 text-sm font-semibold text-black"
               >

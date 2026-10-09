@@ -77,7 +77,7 @@ export function AboutSection({ variant }: AboutSectionProps) {
               that matter in real-world use.
             </p>
             <Link
-              href="/about"
+              href={`/${variant}/about`}
               className={`mt-6 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
                 isDark
                   ? 'text-cyan-300 hover:text-white'

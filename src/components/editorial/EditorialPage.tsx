@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { MotionConfig } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { showcaseProjects } from '@/data/showcase';
-import { siteConfig } from '@/lib/site';
 import { EditorialNavbar } from './EditorialNavbar';
 import type { EditorialVariant } from './variant';
 import { EditorialHero } from './EditorialHero';
@@ -68,7 +67,7 @@ function WorkCtaCard({ variant }: { variant: EditorialVariant }) {
         </p>
       </div>
       <Link
-        href={siteConfig.cta.primaryHref}
+        href={`/${variant}/contact`}
         className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-full border border-amber-400/60 px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-amber-300 transition-all hover:-translate-y-0.5 hover:bg-amber-400/10"
         aria-label="Get in touch about a project"
       >
@@ -126,7 +125,7 @@ export function EditorialPage({ variant }: EditorialPageProps) {
                   </h2>
                 </div>
                 <Link
-                  href="/projects"
+                  href={`/${variant}/projects`}
                   className={`inline-flex items-center gap-1.5 text-[13px] font-semibold transition-colors ${
                     isDark
                       ? 'text-[#9aa6b8] hover:text-white'

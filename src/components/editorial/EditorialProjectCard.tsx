@@ -82,7 +82,7 @@ export function EditorialProjectCard({
 
         <div className="mt-4 flex items-center justify-between gap-3">
           <Link
-            href={`/projects/${project.slug}`}
+            href={`/${variant}/projects/${project.slug}`}
             className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.12em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${
               isDark
                 ? 'border-white/12 text-[#dfe5ee] hover:border-cyan-300/40 hover:bg-cyan-300/10 focus-visible:outline-[#7dd3fc]'

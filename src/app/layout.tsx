@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/lib/site';
-import { ThemeProvider } from '@/lib/theme';
-import { ConditionalChrome } from '@/components/ConditionalChrome';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -91,9 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <ThemeProvider>
-          <ConditionalChrome>{children}</ConditionalChrome>
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

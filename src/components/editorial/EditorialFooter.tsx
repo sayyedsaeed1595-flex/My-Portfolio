@@ -86,7 +86,7 @@ export function EditorialFooter({ variant }: EditorialFooterProps) {
             aria-label="Social and site links"
           >
             <Link
-              href="/projects"
+              href={`/${variant}/projects`}
               className={`text-[11px] font-medium tracking-[0.18em] transition-colors ${
                 isDark
                   ? 'text-[#8e99a8] hover:text-[#f2ede3]'
