@@ -16,7 +16,7 @@ export function EditorialHeader({ variant }: EditorialHeaderProps) {
     <header className="w-full">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div
-          className={`flex items-center justify-between gap-4 py-5 border-b ${
+          className={`flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-5 border-b ${
             isDark ? 'border-[#22314a]' : 'border-[#ddd3c2]'
           }`}
         >
