@@ -654,3 +654,8 @@ button:focus-visible {
 .nav-pill.active {
   @apply text-black;
 }
+
+/* Editorial serif headline (dark / light portfolio variants) */
+.font-editorial {
+  font-family: var(--font-playfair), "Didot", "Bodoni MT", "Playfair Display", Georgia, "Times New Roman", serif;
+}

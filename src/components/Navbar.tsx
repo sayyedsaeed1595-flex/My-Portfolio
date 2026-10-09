@@ -11,7 +11,9 @@ import { useTheme } from '@/lib/theme';
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState<string>('/');
+  const [activeItem, setActiveItem] = useState<string>(() =>
+    typeof window === 'undefined' ? '/' : window.location.pathname,
+  );
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -20,11 +22,6 @@ export function Navbar() {
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const path = window.location.pathname;
-    setActiveItem(path === '/' ? '/' : path);
   }, []);
 
   const navigationItems = [
@@ -82,7 +79,7 @@ export function Navbar() {
                 transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
                 aria-hidden="true"
               />
-              {navigationItems.map((item, index) => (
+              {navigationItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}

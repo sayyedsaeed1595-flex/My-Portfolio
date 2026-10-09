@@ -17,6 +17,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${base}/dark`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: 'monthly',
+      priority: 1,
+    },
+    {
+      url: `${base}/light`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${base}/projects`,
       lastModified: LAST_MODIFIED,
       changeFrequency: 'monthly',

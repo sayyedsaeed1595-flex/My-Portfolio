@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 import { siteConfig } from '@/lib/site';
 import { ThemeProvider } from '@/lib/theme';
+import { ConditionalChrome } from '@/components/ConditionalChrome';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -14,6 +13,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -84,12 +89,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <ConditionalChrome>{children}</ConditionalChrome>
         </ThemeProvider>
       </body>
     </html>
